@@ -37,7 +37,7 @@
 
 ### Summary
 
-This project is on the exploration of the lowest-level languages for three popular platforms: Apple devices, Operating Systems, and Browsers. The goal for each environment is to develop a full featured web development framework and an example application.
+This project is on the exploration of the lowest-level languages for three popular platforms: Apple devices, Linux Systems, and Browsers. The goal for each environment is to develop a full featured web development framework and an example application.
 
 ### License
 
