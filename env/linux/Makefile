@@ -8,17 +8,19 @@
 # for you (this is what AWS uses, v16.04).
 #
 
-mac: install-mac
+enter:
+	@docker build . -t meditations:latest
+	@docker run -it -v `pwd`:/src --rm meditations:latest bash
+.PHONY: enter
 
-.PHONY: mac
+call: build
+	@./app/meditations
+.PHONY: call
 
-linux: install-linux
-
-.PHONY: install-linux
-
-install-mac:
-	@docker run -it -v `pwd`:/src ubuntu:xenial /bin/bash
-.PHONY: install-mac
+build:
+	@nasm -f elf64 -o app/meditations.o app/meditations.asm
+	@ld -o app/meditations app/meditations.o
+.PHONY: build
 
 inspect-mac:
 	@docker ps -a
@@ -27,24 +29,3 @@ inspect-mac:
 clear-mac:
 	@docker rm -f x
 .PHONY: clear-mac
-
-#
-# First run this manually to get Makefile on Linux:
-#
-# 	cd src
-# 	./start.sh
-#
-
-install-linux:
-	@apt-get update -y
-	@apt-get install nasm -y
-.PHONY: install-linux
-
-build:
-	@nasm -f elf64 -o meditations.o meditations.asm
-	@ld -o meditations meditations.o
-.PHONY: build
-
-call: build
-	@./meditations
-.PHONY: call
