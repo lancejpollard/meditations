@@ -1,2 +1,2 @@
 env/linux/meditations
-env/linux/meditations.o
+*.o
